@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 
 const CharacterListContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  display: block;
   padding: 20px 30px;
+  border-top: 5px solid transparent;
+
+  &.loading {
+    border-color: #e62429;
+  }
 `
 
 const CharacterGrid = styled.div`

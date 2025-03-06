@@ -1,8 +1,9 @@
 import { createContext, useState, ReactNode } from 'react'
+import { Character } from '../interfaces/Character.ts'
 
 interface FavoritesContextType {
-  favorites: number[]
-  addFavorite: (id: number) => void
+  favorites: Character[]
+  addFavorite: (newCharacter: Character) => void
   removeFavorite: (id: number) => void
 }
 
@@ -13,14 +14,16 @@ export const FavoritesContext = createContext<FavoritesContextType>({
 })
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
-  const [favorites, setFavorites] = useState<number[]>([])
+  const [favorites, setFavorites] = useState<Character[]>([])
 
-  const addFavorite = (id: number) => {
-    setFavorites((prevFavorites) => [...prevFavorites, id])
+  const addFavorite = (newCharacter: Character) => {
+    setFavorites((prevFavorites) => [...prevFavorites, newCharacter])
   }
 
   const removeFavorite = (id: number) => {
-    setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav !== id))
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((fav) => fav.id !== id),
+    )
   }
 
   return (

@@ -7,7 +7,7 @@ import { useState } from 'react'
 interface CharacterCardProps {
   character: Character
   isFavorite: boolean
-  handleToggleFavorite: (id: number) => void
+  handleToggleFavorite: (character: Character) => void
 }
 
 const CharacterCard = ({
@@ -32,7 +32,7 @@ const CharacterCard = ({
             onClick={(event) => {
               event.preventDefault()
               event.stopPropagation()
-              handleToggleFavorite(character.id)
+              handleToggleFavorite(character)
             }}
           >
             <Heart className={isFavorite ? 'heart' : 'empty'} />

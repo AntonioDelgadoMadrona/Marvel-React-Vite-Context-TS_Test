@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 
-const CharacterListContainer = styled.div`
+const FavoritesContainer = styled.div`
   display: block;
   padding: 20px 30px;
   border-top: 5px solid transparent;
+`
 
-  &.loading {
-    border-color: #e62429;
-  }
+const Title = styled.h1`
+  font-size: 1.5rem;
+  margin: 10px 0;
+  color: #000;
+  text-transform: uppercase;
 `
 
 const CharacterGrid = styled.div`
@@ -17,4 +20,4 @@ const CharacterGrid = styled.div`
   gap: 20px;
 `
 
-export { CharacterListContainer, CharacterGrid }
+export { FavoritesContainer, Title, CharacterGrid }

@@ -1,4 +1,4 @@
-const CACHE_DURATION = 24 * 60 * 60 * 1000
+import { CACHE_DURATION } from '../constants/storageKeys.ts'
 
 export const setCache = (key: string, data: any) => {
   localStorage.setItem(key, JSON.stringify(data))

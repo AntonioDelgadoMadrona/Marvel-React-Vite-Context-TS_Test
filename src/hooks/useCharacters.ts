@@ -1,9 +1,10 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import { getCharacterListHandler } from '../api/handlers/marvelHandlers.ts'
 import { mapCharacterData } from '../utils/characterUtils.ts'
 import { Character } from '../interfaces/Character.ts'
 import { FavoritesContext } from '../context/FavoritesContext.tsx'
 import { getCache, setCache } from '../utils/cacheUtils.ts'
+import { CHARACTERS_STORAGE_KEY } from '../constants/storageKeys.ts'
 
 interface useCharactersProps {
   characters: Character[]
@@ -13,27 +14,24 @@ interface useCharactersProps {
   loadingCharacters: boolean
 }
 
-const CACHE_KEY = 'charactersCache'
-
 export const useCharacters = (): useCharactersProps => {
-  const [characters, setCharacters] = useState([])
+  const [characters, setCharacters] = useState<Character[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const { favorites, addFavorite, removeFavorite } =
     useContext(FavoritesContext)
 
-  useEffect(() => {
-    loadCharacters()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const loadCharacters = async () => {
-    const cachedData = getCache(CACHE_KEY)
+  const loadCharacters = useCallback(async () => {
+    const cachedData = getCache(CHARACTERS_STORAGE_KEY)
     if (cachedData) {
       setCharacters(cachedData)
     } else {
       await getCharacters()
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    loadCharacters()
+  }, [loadCharacters])
 
   const getCharacters = async (search = '') => {
     try {
@@ -41,7 +39,7 @@ export const useCharacters = (): useCharactersProps => {
       const data = await getCharacterListHandler(search)
       const mapedData = mapCharacterData(data)
       setCharacters(mapedData)
-      if (!search) setCache(CACHE_KEY, mapedData)
+      if (!search) setCache(CHARACTERS_STORAGE_KEY, mapedData)
     } catch (err) {
       console.log(err)
     } finally {

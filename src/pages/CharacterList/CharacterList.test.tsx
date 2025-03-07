@@ -10,7 +10,7 @@ jest.mock('../../components/CharacterCard/CharacterCard.tsx', () => {
 })
 
 describe('CharacterList', () => {
-  it('should render the `CharacterList` component', () => {
+  test('should render the `CharacterList` component', () => {
     ;(useCharacters as jest.Mock).mockReturnValue({
       characters: [],
       toggleFavorite: jest.fn(),
@@ -23,7 +23,7 @@ describe('CharacterList', () => {
     expect(container.firstChild).toBeInTheDocument()
   })
 
-  it('should apply the `.loading` class to CharacterListContainer when loading is true', () => {
+  test('should apply the `.loading` class to CharacterListContainer when loading is true', () => {
     ;(useCharacters as jest.Mock).mockReturnValue({
       characters: [],
       toggleFavorite: jest.fn(),
@@ -36,7 +36,7 @@ describe('CharacterList', () => {
     expect(container.firstChild).toHaveClass('loading')
   })
 
-  it('should render the `Search` component', () => {
+  test('should render the `Search` component', () => {
     ;(useCharacters as jest.Mock).mockReturnValue({
       characters: [],
       toggleFavorite: jest.fn(),
@@ -52,7 +52,7 @@ describe('CharacterList', () => {
     ).toBeInTheDocument()
   })
 
-  it('should render characters when data is available', () => {
+  test('should render characters when data is available', () => {
     ;(useCharacters as jest.Mock).mockReturnValue({
       characters: [
         { id: 1, name: 'Name' },

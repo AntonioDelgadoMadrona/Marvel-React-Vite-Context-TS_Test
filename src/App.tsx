@@ -3,6 +3,7 @@ import { GlobalStyles } from './App.styled.js'
 import { FavoritesProvider } from './context/FavoritesContext.tsx'
 import Header from './components/Header/Header.tsx'
 import CharacterList from './pages/CharacterList/CharacterList.tsx'
+import Favorites from './pages/Favorites/Favorites.tsx'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<CharacterList />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </Router>
     </FavoritesProvider>

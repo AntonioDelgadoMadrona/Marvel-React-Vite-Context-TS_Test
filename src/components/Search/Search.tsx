@@ -12,10 +12,10 @@ import { useDebounce } from '../../hooks/useDebounce.ts'
 interface SearchProps {
   results: number
   handleSearch: (value: string) => void
-  loading: boolean
+  loading?: boolean
 }
 
-const Search = ({ results, handleSearch, loading }: SearchProps) => {
+const Search = ({ results, handleSearch, loading = false }: SearchProps) => {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 1500)
   const [lastSearch, setLastSearch] = useState<string>('')

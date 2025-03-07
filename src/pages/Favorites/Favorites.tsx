@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import CharacterCard from '../../components/CharacterCard/CharacterCard.tsx'
 import Search from '../../components/Search/Search.tsx'
-import { useCharacters } from '../../hooks/useCharacters.ts'
+import { useFavorites } from '../../context/FavoritesContext.tsx'
 import { FavoritesContainer, Title, CharacterGrid } from './Favorites.styled.js'
 
 function Favorites() {
-  const { toggleFavorite, favorites } = useCharacters()
+  const { favorites, handleFavorite } = useFavorites()
   const [searchFav, setSearchFav] = useState('')
 
   const handleSearchFavorite = (favName: string) => {
@@ -29,7 +29,7 @@ function Favorites() {
             key={favItem.id}
             character={favItem}
             isFavorite={true}
-            handleToggleFavorite={toggleFavorite}
+            handleFavorite={handleFavorite}
           />
         ))}
       </CharacterGrid>

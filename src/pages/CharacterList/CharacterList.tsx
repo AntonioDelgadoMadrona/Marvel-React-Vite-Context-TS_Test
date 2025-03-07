@@ -1,5 +1,6 @@
 import CharacterCard from '../../components/CharacterCard/CharacterCard.tsx'
 import Search from '../../components/Search/Search.tsx'
+import { useFavorites } from '../../context/FavoritesContext.tsx'
 import { useCharacters } from '../../hooks/useCharacters.ts'
 import {
   CharacterListContainer,
@@ -7,20 +8,15 @@ import {
 } from './CharacterList.styled.js'
 
 function CharacterList() {
-  const {
-    characters,
-    toggleFavorite,
-    favorites,
-    handleSearch,
-    loadingCharacters,
-  } = useCharacters()
+  const { characters, handleSearch, apiLoading } = useCharacters()
+  const { favorites, handleFavorite } = useFavorites()
 
   return (
-    <CharacterListContainer className={loadingCharacters ? 'loading' : ''}>
+    <CharacterListContainer className={apiLoading ? 'loading' : ''}>
       <Search
         results={characters.length}
         handleSearch={handleSearch}
-        loading={loadingCharacters}
+        loading={apiLoading}
       />
       <CharacterGrid data-testid="character-grid">
         {characters.map((characterItem) => (
@@ -28,7 +24,7 @@ function CharacterList() {
             key={characterItem.id}
             character={characterItem}
             isFavorite={favorites.some((fav) => fav.id === characterItem.id)}
-            handleToggleFavorite={toggleFavorite}
+            handleFavorite={handleFavorite}
           />
         ))}
       </CharacterGrid>

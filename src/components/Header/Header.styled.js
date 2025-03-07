@@ -12,17 +12,15 @@ const HeaderContainer = styled.header`
 
 const Logo = styled.img`
   height: 50px;
-  cursor: pointer;
 `
 
-const FavoritesButton = styled.button`
+const FavoritesButton = styled.div`
   background: none;
   border: none;
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
   display: grid;
-  grid-direction: column;
   gap: 5px;
   grid-template-columns: auto auto;
 `

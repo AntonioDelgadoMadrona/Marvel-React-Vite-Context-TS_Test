@@ -1,24 +1,22 @@
-import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { FavoritesContext } from '../../context/FavoritesContext.tsx'
+import { Link } from 'react-router-dom'
+import { useFavorites } from '../../context/FavoritesContext.tsx'
 import { HeaderContainer, Logo, FavoritesButton } from './Header.styled.js'
 import Heart from '../Heart/Heart.styled.js'
 
 const Header = () => {
-  const { favorites } = useContext(FavoritesContext)
-  const navigate = useNavigate()
+  const { favorites } = useFavorites()
 
   return (
     <HeaderContainer>
-      <Logo
-        src="/Marvel.png"
-        alt="marvel_logo"
-        onClick={() => navigate('/')}
-      ></Logo>
-      <FavoritesButton onClick={() => navigate('/favorites')}>
-        <Heart className="large" />
-        {favorites.length}
-      </FavoritesButton>
+      <Link to="/">
+        <Logo src="/Marvel.png" alt="marvel_logo" />
+      </Link>
+      <Link to="/favorites">
+        <FavoritesButton>
+          <Heart className="large" />
+          {favorites.length}
+        </FavoritesButton>
+      </Link>
     </HeaderContainer>
   )
 }

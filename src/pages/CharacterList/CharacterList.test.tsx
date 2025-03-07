@@ -1,8 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import CharacterList from './CharacterList.tsx'
 import { useCharacters } from '../../hooks/useCharacters.ts'
+import { useFavorites } from '../../context/FavoritesContext.tsx'
 
 jest.mock('../../hooks/useCharacters')
+jest.mock('../../../api/constants/apiUrls.ts', () => ({
+  API_KEY: 'clave-de-prueba',
+  API_URL: 'https://gateway.marvel.com/v1/public/characters',
+}))
+jest.mock('../../context/FavoritesContext.tsx', () => ({
+  useFavorites: jest.fn(),
+}))
 jest.mock('../../components/CharacterCard/CharacterCard.tsx', () => {
   return function MockCharacterCard() {
     return <div></div>
@@ -10,13 +18,20 @@ jest.mock('../../components/CharacterCard/CharacterCard.tsx', () => {
 })
 
 describe('CharacterList', () => {
+  beforeEach(() => {
+    ;(useFavorites as jest.Mock).mockReturnValue({
+      favorites: [],
+      handleFavorite: jest.fn(),
+    })
+  })
+
   test('should render the `CharacterList` component', () => {
     ;(useCharacters as jest.Mock).mockReturnValue({
       characters: [],
       toggleFavorite: jest.fn(),
       favorites: [],
       handleSearch: jest.fn(),
-      loadingCharacters: false,
+      apiLoading: false,
     })
 
     const { container } = render(<CharacterList />)
@@ -29,7 +44,7 @@ describe('CharacterList', () => {
       toggleFavorite: jest.fn(),
       favorites: [],
       handleSearch: jest.fn(),
-      loadingCharacters: true,
+      apiLoading: true,
     })
 
     const { container } = render(<CharacterList />)
@@ -42,7 +57,7 @@ describe('CharacterList', () => {
       toggleFavorite: jest.fn(),
       favorites: [],
       handleSearch: jest.fn(),
-      loadingCharacters: false,
+      apiLoading: false,
     })
 
     render(<CharacterList />)
@@ -61,7 +76,7 @@ describe('CharacterList', () => {
       toggleFavorite: jest.fn(),
       favorites: [],
       handleSearch: jest.fn(),
-      loadingCharacters: false,
+      apiLoading: false,
     })
 
     render(<CharacterList />)

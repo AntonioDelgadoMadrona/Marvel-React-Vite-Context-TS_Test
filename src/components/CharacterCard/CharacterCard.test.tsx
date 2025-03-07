@@ -16,7 +16,7 @@ describe('CharacterCard', () => {
         <CharacterCard
           character={mockCharacter}
           isFavorite={false}
-          handleToggleFavorite={jest.fn()}
+          handleFavorite={jest.fn()}
         />
       </MemoryRouter>,
     )
@@ -36,7 +36,7 @@ describe('CharacterCard', () => {
         <CharacterCard
           character={mockCharacter}
           isFavorite={false}
-          handleToggleFavorite={mockHandleToggleFavorite}
+          handleFavorite={mockHandleToggleFavorite}
         />
       </MemoryRouter>,
     )
@@ -54,7 +54,7 @@ describe('CharacterCard', () => {
         <CharacterCard
           character={mockCharacter}
           isFavorite={false}
-          handleToggleFavorite={jest.fn()}
+          handleFavorite={jest.fn()}
         />
       </MemoryRouter>,
     )

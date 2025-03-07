@@ -1,24 +1,31 @@
-import { useState, useEffect, useContext, useCallback } from 'react'
-import { getCharacterListHandler } from '../api/handlers/marvelHandlers.ts'
-import { mapCharacterData } from '../utils/characterUtils.ts'
+import { useState, useEffect, useCallback } from 'react'
+import {
+  getCharacterListHandler,
+  getCharacterDetailsHanlder,
+} from '../../api/handlers/marvelHandlers.ts'
+import {
+  mapCharacterData,
+  mapCharacterDetaisData,
+} from '../utils/characterUtils.ts'
 import { Character } from '../interfaces/Character.ts'
-import { FavoritesContext } from '../context/FavoritesContext.tsx'
 import { getCache, setCache } from '../utils/cacheUtils.ts'
 import { CHARACTERS_STORAGE_KEY } from '../constants/storageKeys.ts'
+import { CharacterDetails } from '../interfaces/CharacterDetails.ts'
 
 interface useCharactersProps {
   characters: Character[]
-  toggleFavorite: (character: Character) => void
-  favorites: Character[]
   handleSearch: (search: string) => void
-  loadingCharacters: boolean
+  apiLoading: boolean
+  getCharacterDetails: (characterId: string) => void
+  characterDetails: CharacterDetails | undefined
 }
 
 export const useCharacters = (): useCharactersProps => {
   const [characters, setCharacters] = useState<Character[]>([])
   const [loading, setLoading] = useState<boolean>(false)
-  const { favorites, addFavorite, removeFavorite } =
-    useContext(FavoritesContext)
+  const [characterDetails, setCharacterDetails] = useState<
+    CharacterDetails | undefined
+  >()
 
   const loadCharacters = useCallback(async () => {
     const cachedData = getCache(CHARACTERS_STORAGE_KEY)
@@ -38,7 +45,7 @@ export const useCharacters = (): useCharactersProps => {
       setLoading(true)
       const data = await getCharacterListHandler(search)
       const mapedData = mapCharacterData(data)
-      setCharacters(mapedData)
+      setCharacters([...mapedData])
       if (!search) setCache(CHARACTERS_STORAGE_KEY, mapedData)
     } catch (err) {
       console.log(err)
@@ -47,13 +54,18 @@ export const useCharacters = (): useCharactersProps => {
     }
   }
 
-  const toggleFavorite = (character: Character) => {
-    if (favorites.some((favChar: Character) => favChar.id === character.id)) {
-      removeFavorite(character.id)
-    } else {
-      addFavorite(character)
+  const getCharacterDetails = useCallback(async (characterId: string) => {
+    try {
+      setLoading(true)
+      const data = await getCharacterDetailsHanlder(characterId)
+      const mapedDated = mapCharacterDetaisData(data)
+      setCharacterDetails({ ...mapedDated })
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
     }
-  }
+  }, [])
 
   const handleSearch = (search: string) => {
     getCharacters(search)
@@ -61,9 +73,9 @@ export const useCharacters = (): useCharactersProps => {
 
   return {
     characters,
-    toggleFavorite,
-    favorites,
     handleSearch,
-    loadingCharacters: loading,
+    apiLoading: loading,
+    getCharacterDetails,
+    characterDetails,
   }
 }

@@ -1,10 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import Favorites from './Favorites.tsx'
-import { FavoritesProvider } from '../../context/FavoritesContext.tsx'
-import { useCharacters } from '../../hooks/useCharacters.ts'
+import { useFavorites } from '../../context/FavoritesContext.tsx'
 
 jest.mock('../../hooks/useCharacters.ts', () => ({
   useCharacters: jest.fn(),
+}))
+jest.mock('../../context/FavoritesContext.tsx', () => ({
+  useFavorites: jest.fn(),
 }))
 jest.mock('../../components/CharacterCard/CharacterCard.tsx', () => {
   return function MockCharacterCard() {
@@ -14,8 +16,6 @@ jest.mock('../../components/CharacterCard/CharacterCard.tsx', () => {
 jest.mock('../../hooks/useDebounce.ts', () => ({
   useDebounce: (value: string) => value, // Return instantly
 }))
-
-const mockToggleFavorite = jest.fn()
 
 const mockFavorites = [
   {
@@ -28,18 +28,14 @@ const mockFavorites = [
 
 describe('Favorites Page', () => {
   beforeEach(() => {
-    ;(useCharacters as jest.Mock).mockReturnValue({
+    ;(useFavorites as jest.Mock).mockReturnValue({
       favorites: mockFavorites,
-      toggleFavorite: mockToggleFavorite,
+      handleFavorite: jest.fn(),
     })
   })
 
   test('renders the favorites page correctly', () => {
-    render(
-      <FavoritesProvider>
-        <Favorites />
-      </FavoritesProvider>,
-    )
+    render(<Favorites />)
 
     expect(screen.getByText('Favorites')).toBeInTheDocument()
     expect(
@@ -50,11 +46,7 @@ describe('Favorites Page', () => {
   })
 
   test('filters favorite characters correctly when searching by name', () => {
-    render(
-      <FavoritesProvider>
-        <Favorites />
-      </FavoritesProvider>,
-    )
+    render(<Favorites />)
 
     const searchInput = screen.getByPlaceholderText('Search a character...')
     fireEvent.change(searchInput, { target: { value: 'Spider' } })

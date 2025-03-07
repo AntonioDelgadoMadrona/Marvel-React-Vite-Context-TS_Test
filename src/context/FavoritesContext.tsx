@@ -1,18 +1,22 @@
-import { createContext, useState, ReactNode, useEffect } from 'react'
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useEffect,
+  useContext,
+} from 'react'
 import { Character } from '../interfaces/Character.ts'
 import { getCache, setCache } from '../utils/cacheUtils.ts'
 import { FAVORITES_STORAGE_KEY } from '../constants/storageKeys.ts'
 
 interface FavoritesContextType {
   favorites: Character[]
-  addFavorite: (newCharacter: Character) => void
-  removeFavorite: (id: number) => void
+  handleFavorite: (character: Character) => void
 }
 
 export const FavoritesContext = createContext<FavoritesContextType>({
   favorites: [],
-  addFavorite: () => {},
-  removeFavorite: () => {},
+  handleFavorite: () => {},
 })
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
@@ -24,21 +28,27 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     setCache(FAVORITES_STORAGE_KEY, favorites)
   }, [favorites])
 
-  const addFavorite = (newCharacter: Character) => {
-    setFavorites((prevFavorites) => [...prevFavorites, newCharacter])
-  }
-
-  const removeFavorite = (id: number) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((fav) => fav.id !== id),
-    )
+  const handleFavorite = (character: Character) => {
+    if (favorites.some((favChar) => favChar.id === character.id)) {
+      setFavorites((prevFavorites) =>
+        prevFavorites.filter((fav) => fav.id !== character.id),
+      )
+    } else {
+      setFavorites((prevFavorites) => [...prevFavorites, character])
+    }
   }
 
   return (
-    <FavoritesContext.Provider
-      value={{ favorites, addFavorite, removeFavorite }}
-    >
+    <FavoritesContext.Provider value={{ favorites, handleFavorite }}>
       {children}
     </FavoritesContext.Provider>
   )
+}
+
+export const useFavorites = (): FavoritesContextType => {
+  const context = useContext(FavoritesContext)
+  if (context === undefined) {
+    throw new Error('useFavorites must be used within a FavoritesProvider')
+  }
+  return context
 }

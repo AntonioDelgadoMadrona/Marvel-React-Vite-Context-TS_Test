@@ -4,6 +4,7 @@ import { FavoritesProvider } from './context/FavoritesContext.tsx'
 import Header from './components/Header/Header.tsx'
 import CharacterList from './pages/CharacterList/CharacterList.tsx'
 import Favorites from './pages/Favorites/Favorites.tsx'
+import CharacterDetail from './pages/CharacterDetail/CharacterDetail.tsx'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CharacterList />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/character/:id" element={<CharacterDetail />} />
         </Routes>
       </Router>
     </FavoritesProvider>

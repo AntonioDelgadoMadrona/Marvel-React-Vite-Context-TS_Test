@@ -9,7 +9,10 @@ import {
 } from '../utils/characterUtils.ts'
 import { Character } from '../interfaces/Character.ts'
 import { getCache, setCache } from '../utils/cacheUtils.ts'
-import { CHARACTERS_STORAGE_KEY } from '../constants/storageKeys.ts'
+import {
+  CHARACTER_DETAILS_STORAGE_KEY,
+  CHARACTERS_STORAGE_KEY,
+} from '../constants/storageKeys.ts'
 import { CharacterDetails } from '../interfaces/CharacterDetails.ts'
 
 interface useCharactersProps {
@@ -55,11 +58,20 @@ export const useCharacters = (): useCharactersProps => {
   }
 
   const getCharacterDetails = useCallback(async (characterId: string) => {
+    const cacheKey = CHARACTER_DETAILS_STORAGE_KEY
+    const cachedCharacter = getCache(cacheKey)
+
+    if (cachedCharacter && cachedCharacter.id === Number(characterId)) {
+      setCharacterDetails({ ...cachedCharacter })
+      return
+    }
+
     try {
       setLoading(true)
       const data = await getCharacterDetailsHanlder(characterId)
-      const mapedDated = mapCharacterDetaisData(data)
-      setCharacterDetails({ ...mapedDated })
+      const mappedData = mapCharacterDetaisData(data)
+      setCharacterDetails({ ...mappedData })
+      setCache(cacheKey, mappedData)
     } catch (err) {
       console.error(err)
     } finally {

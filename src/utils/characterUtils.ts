@@ -11,7 +11,7 @@ export const mapCharacterData = (characterList: any): Character[] => {
 
 export const mapCharacterDetaisData = (character: any): CharacterDetails => {
   return {
-    comics: character?.comics.items, // Array
+    comics: character?.comics?.items ? [...character.comics.items] : [],
     description: character.description,
     id: character.id,
     img: `${character.thumbnail.path}.${character.thumbnail.extension}`,

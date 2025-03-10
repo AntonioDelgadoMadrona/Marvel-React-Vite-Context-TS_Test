@@ -6,7 +6,7 @@ import { useFavorites } from '../../context/FavoritesContext.tsx'
 jest.mock('../../hooks/useCharacters')
 jest.mock('../../../api/constants/apiUrls.ts', () => ({
   API_KEY: 'clave-de-prueba',
-  API_URL: 'https://gateway.marvel.com/v1/public/characters',
+  API_URL: 'https://gateway.marvel.com/v1/public',
 }))
 jest.mock('../../context/FavoritesContext.tsx', () => ({
   useFavorites: jest.fn(),

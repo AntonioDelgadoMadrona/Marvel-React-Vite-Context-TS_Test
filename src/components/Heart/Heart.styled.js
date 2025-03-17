@@ -17,7 +17,7 @@ const Heart = styled.span`
     width: 10px;
     height: 15px;
     border-radius: 10px 10px 0 0;
-    background: #e62429;
+    background: var(--primary-color);
     transition: background 0.35s ease-in-out;
   }
 
@@ -53,21 +53,21 @@ const Heart = styled.span`
   &.white {
     &::before,
     &::after {
-      background: white;
+      background: var(--tertiary-color);
     }
   }
 
   &.empty {
     &::before,
     &::after {
-      background: #fafafa;
+      background: var(--tertiary-color);
     }
   }
 
   // Father hovered
   .hovered &.heart::before,
   .hovered &.heart::after {
-    background: white; /* Cambia a blanco en hover */
+    background: var(--tertiary-color);
   }
 `
 

@@ -3,11 +3,11 @@ import styled from 'styled-components'
 const DetailsContainer = styled.div`
   display: block;
   border-top: 5px solid #151515;
-  color: #fafafa;
+  color: var(--tertiary-color);
   padding-bottom: 50px;
 
   &.loading {
-    border-color: #e62429;
+    border-color: var(--primary-color);
   }
 `
 
@@ -16,7 +16,7 @@ const DetailsSection = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
   gap: 20px;
-  background: #000;
+  background: var(--secondary-color);
   justify-content: center;
 `
 
@@ -51,7 +51,7 @@ const NameRow = styled.div`
 
   & > h1 {
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: var(--font-size-lg);
     width: 90%;
   }
 
@@ -71,12 +71,7 @@ const NameRow = styled.div`
 `
 
 const DescriptionRow = styled.p`
-  font:
-    400 16px/1.1 RobotoCondensed Bold,
-    Trebuchet MS,
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: var(--font-secondary);
 `
 
 const ComicsSection = styled.div`
@@ -88,8 +83,8 @@ const ComicsSection = styled.div`
 
   h2 {
     text-transform: uppercase;
-    font-size: 1.5rem;
-    color: #000;
+    font-size: var(--font-size-lg);
+    color: var(--secondary-color);
   }
 `
 
@@ -100,7 +95,7 @@ const ComicsContainer = styled.div`
   display: flex;
   gap: 16px;
   padding: 8px 0;
-  color: #000;
+  color: var(--secondary-color);
 
   &::-webkit-scrollbar {
     height: 5px;
@@ -108,7 +103,7 @@ const ComicsContainer = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #e62429;
+    background-color: var(--primary-color);
   }
 `
 
@@ -136,18 +131,18 @@ const ComicBody = styled.div`
   width: 180px;
   height: auto;
   padding: 10px 0;
-  color: #000;
+  color: var(--secondary-color);
 
   p:first-child {
-    font-size: 0.9rem;
+    font-size: var(--font-size-md);
     font-weight: bold;
     width: 100%;
     text-wrap: auto;
   }
 
   p {
-    font-size: 0.8rem;
-    color: #000;
+    font-size: var(--font-size-sm);
+    color: var(--secondary-color);
     margin-top: 10px;
   }
 `

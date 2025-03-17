@@ -6,7 +6,7 @@ const CharacterListContainer = styled.div`
   border-top: 5px solid transparent;
 
   &.loading {
-    border-color: #e62429;
+    border-color: var(--primary-color);
   }
 `
 

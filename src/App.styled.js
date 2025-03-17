@@ -5,12 +5,12 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-primary);
   }
 
   body {
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
     margin: 0;
     padding: 0;
 

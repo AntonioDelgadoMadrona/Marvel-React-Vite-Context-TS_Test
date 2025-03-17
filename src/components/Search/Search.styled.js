@@ -25,16 +25,16 @@ const SearchInput = styled.input`
   width: 100%;
   outline: none;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   background: transparent;
 
   &::placeholder {
-    color: #c7bebc;
+    color: var(--placeholder-color);
   }
 `
 
 const SearchResults = styled.span`
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
   margin: 1rem 0;
 `

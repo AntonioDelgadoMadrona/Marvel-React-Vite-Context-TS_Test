@@ -7,9 +7,9 @@ const FavoritesContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: var(--font-size-lg);
   margin: 10px 0;
-  color: #000;
+  color: var(--secondary-color);
   text-transform: uppercase;
 `
 

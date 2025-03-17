@@ -5,7 +5,7 @@ const Card = styled.div`
   width: 100%;
   height: 100%;
   margin: 6px 0 4px;
-  background: #000;
+  background: var(--secondary-color);
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
@@ -15,14 +15,14 @@ const Card = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #e62429;
+    background: var(--primary-color);
     top: -100%;
     left: 0;
     transition: top 0.3s ease-in-out;
   }
 
   &::after {
-    border-color: transparent #fff transparent transparent;
+    border-color: transparent var(--tertiary-color) transparent transparent;
     border-style: solid;
     border-width: 12px 12px 0 0;
     bottom: 0;
@@ -41,11 +41,7 @@ const Card = styled.div`
     text-decoration: none;
     position: relative;
     z-index: 2;
-    color: white;
-  }
-
-  &:hovered .heart {
-    background: white !important; /* Cambia a blanco cuando el corazón es favorito y la card está en hover */
+    color: var(--tertiary-color);
   }
 `
 
@@ -57,7 +53,7 @@ const CardImage = styled.div`
   margin: 0;
   overflow: hidden;
   padding: 0;
-  border-bottom: 5px solid #e62429;
+  border-bottom: 5px solid var(--primary-color);
 
   img {
     width: 100%;
@@ -78,15 +74,12 @@ const CardBody = styled.div`
     -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
-    font:
-      400 16px/1.1 RobotoCondensed Bold,
-      Trebuchet MS,
-      Helvetica,
-      Arial,
-      sans-serif;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-md);
+    font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--tertiary-color);
   }
 
   button {

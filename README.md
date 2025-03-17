@@ -23,6 +23,9 @@ Marvel-React-Vite-Context-TS_Test/
 ├── src/
 │   ├── assets/           # Imágenes, logos y otros archivos estáticos
 │   ├── components/       # Componentes reutilizables
+│   │   ├── atoms/        # Componentes más pequeños y básicos
+│   │   ├── molecules/    # Componentes que combinan varios átomos
+│   │   ├── organisms/    # Componentes más grandes y estructurales
 │   ├── context/          # Gestión de estados globales con React Context
 │   ├── hooks/            # Custom hooks reutilizables
 │   ├── pages/            # Componentes que representan vistas completas
@@ -95,7 +98,7 @@ npm run test
 La aplicación está diseñada siguiendo principios SOLID con un enfoque modular basado en componentes:
 
 - **React Context**: Manejo centralizado del estado global (personajes favoritos, resultados de búsqueda).
-- **Componentes**: Diseñados para ser reutilizables y fácilmente mantenibles.
+- **Componentes**: Se ha seguido la metodología Atomic Design para estructurar los componentes de manera modular y reutilizable.
 - **Servicios/API**: Separación clara de responsabilidades en lógica de negocio y llamadas a la API.
 - **Styled Components**: CSS modular encapsulado por componentes, facilitando escalabilidad y mantenimiento.
 
@@ -118,11 +121,19 @@ La interfaz cumple fielmente con los diseños propuestos en Figma, tanto en escr
 - Aplicación eficiente con uso inteligente del caché.
 - Código sin errores ni advertencias en consola.
 
-## 📌 Mejoras Potenciales
+## 📌 Refactorización prueba Técnica
 
-- Despliegue en plataformas como Vercel o Netlify.
-- Integración SSR mediante Next.js.
-- Mejoras visuales o funcionales sugeridas por feedback de usuario.
+- **Uso de variables.css**
+
+Para mejorar la escalabilidad y mantenibilidad del código, he añadido un archivo variables.css en la carpeta styles/, donde se definen colores, tipografías y tamaños de texto reutilizables.
+
+- **Uso de Atomic Design**
+
+He aplicado esta metodología para mantener la estructura del proyecto organizada y facilitar la reutilización de componentes.
+
+- **Sobre BEM y Styled-components**
+
+Aunque me gusta la metodología BEM y reconozco que es una buena práctica, en esta prueba técnica he decidido no utilizarla debido a que se usa styled-components, el cual ya encapsula los estilos. Añadir demasiadas className iría un poco en contra de la filosofía de styled-components.
 
 ---
 

@@ -3,11 +3,11 @@ import {
   SearchForm,
   SearchContainer,
   SearchIcon,
-  SearchInput,
   SearchResults,
 } from './Search.styled.js'
-import SearchIco from '../../assets/search.png'
-import { useDebounce } from '../../hooks/useDebounce.ts'
+import SearchIco from '../../../assets/search.png'
+import { useDebounce } from '../../../hooks/useDebounce.ts'
+import Input from '../../atoms/Input/Input.tsx'
 
 interface SearchProps {
   results: number
@@ -31,11 +31,11 @@ const Search = ({ results, handleSearch, loading = false }: SearchProps) => {
     <SearchForm>
       <SearchContainer>
         <SearchIcon src={SearchIco} alt="Search Icon" />
-        <SearchInput
+        <Input
           type="text"
           placeholder="Search a character..."
           value={search}
-          onChange={({ target }: any) => setSearch(target.value)}
+          onChange={(event) => setSearch(event.target.value)}
           disabled={loading}
         />
       </SearchContainer>

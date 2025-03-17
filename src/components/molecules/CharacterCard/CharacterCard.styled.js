@@ -75,7 +75,7 @@ const CardBody = styled.div`
     margin: 0;
     padding: 0;
     font-family: var(--font-primary);
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-sm);
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;

@@ -14,15 +14,4 @@ const Logo = styled.img`
   height: 50px;
 `
 
-const FavoritesButton = styled.div`
-  background: none;
-  border: none;
-  color: var(--tertiary-color);
-  font-size: var(--font-size-md);
-  cursor: pointer;
-  display: grid;
-  gap: 5px;
-  grid-template-columns: auto auto;
-`
-
-export { HeaderContainer, Logo, FavoritesButton }
+export { HeaderContainer, Logo }

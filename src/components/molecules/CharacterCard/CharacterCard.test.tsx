@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import CharacterCard from './CharacterCard.tsx'
-import { Character } from '../../interfaces/Character.ts'
+import { Character } from '../../../interfaces/Character.ts'
 
 const mockCharacter: Character = {
   id: 1,

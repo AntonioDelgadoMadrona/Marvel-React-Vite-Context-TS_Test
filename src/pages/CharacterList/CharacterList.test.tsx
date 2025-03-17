@@ -11,7 +11,7 @@ jest.mock('../../../api/constants/apiUrls.ts', () => ({
 jest.mock('../../context/FavoritesContext.tsx', () => ({
   useFavorites: jest.fn(),
 }))
-jest.mock('../../components/CharacterCard/CharacterCard.tsx', () => {
+jest.mock('../../components/molecules/CharacterCard/CharacterCard.tsx', () => {
   return function MockCharacterCard() {
     return <div></div>
   }

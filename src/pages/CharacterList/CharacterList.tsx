@@ -1,5 +1,5 @@
-import CharacterCard from '../../components/CharacterCard/CharacterCard.tsx'
-import Search from '../../components/Search/Search.tsx'
+import CharacterCard from '../../components/molecules/CharacterCard/CharacterCard.tsx'
+import Search from '../../components/molecules/Search/Search.tsx'
 import { useFavorites } from '../../context/FavoritesContext.tsx'
 import { useCharacters } from '../../hooks/useCharacters.ts'
 import {

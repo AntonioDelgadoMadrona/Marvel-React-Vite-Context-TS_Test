@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Character } from '../../interfaces/Character.ts'
+import { Character } from '../../../interfaces/Character.ts'
 import { Card, CardImage, CardBody } from './CharacterCard.styled.js'
-import Heart from '../Heart/Heart.styled.js'
 import { useState } from 'react'
+import Heart from '../../atoms/Heart/Heart.styled.js'
 
 interface CharacterCardProps {
   character: Character

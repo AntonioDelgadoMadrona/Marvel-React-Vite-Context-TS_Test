@@ -12,7 +12,7 @@ import {
   ComicImage,
   ComicBody,
 } from './CharacterDetail.styled.js'
-import Heart from '../../components/Heart/Heart.styled.js'
+import Heart from '../../components/atoms/Heart/Heart.styled.js'
 import { useCharacters } from '../../hooks/useCharacters.ts'
 import { useEffect } from 'react'
 import { useFavorites } from '../../context/FavoritesContext.tsx'
